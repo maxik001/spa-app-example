@@ -4,6 +4,7 @@
   "description": "spa-app-example",
   "main": "./app/app.js",
   "scripts": {
+    "dev": "./node_modules/.bin/webpack-dev-server --content-base ./www/ --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/maxik001/spa-app-example/issues"
   },
-  "homepage": "https://github.com/maxik001/spa-app-example#readme"
+  "homepage": "https://github.com/maxik001/spa-app-example#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  }
 }
