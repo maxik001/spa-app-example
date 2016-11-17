@@ -1,0 +1,19 @@
+{
+  "name": "spa-app-example",
+  "version": "0.0.1",
+  "description": "spa-app-example",
+  "main": "./app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxik001/spa-app-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxik001/spa-app-example/issues"
+  },
+  "homepage": "https://github.com/maxik001/spa-app-example#readme"
+}
