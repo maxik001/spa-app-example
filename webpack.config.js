@@ -8,5 +8,17 @@ module.exports = {
 	output: {
 		filename: "app.bundle.min.js",
 		path: "./www"
+	},
+	module: {
+		loaders: [
+	  		{
+	  			test: /\.js$/,
+	  			exclude: "/(node_modules|bower_components/",
+	  			loader: "babel-loader",
+	  			query: {
+	  				presets: ["react", "es2015"]
+	  			}
+	  		} 
+	  	]
 	}
 };
