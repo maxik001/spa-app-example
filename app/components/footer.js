@@ -3,8 +3,10 @@ import React from 'react';
 export default class Footer extends React.Component {
 	constructor() {
 		super();
+		
+		let curYear = new Date().getFullYear();
 		this.state = {
-			text: "Copyright (c) Maxim O. Gusev"
+			text: "Copyright (c) Maxim O. Gusev, " + curYear 
 		}
 	}
 	
