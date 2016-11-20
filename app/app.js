@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import Layout from './pages/layout';
 import Login from './pages/login';
+import NotFound from './pages/not_found';
 import Reg from './pages/reg';
 
 const app = document.getElementById('app');
@@ -13,6 +14,7 @@ ReactDOM.render(
 			<Route path="login" component={Login} />
 			<Route path="reg" component={Reg} /> 
 		</Route>
+		<Route path="*" component={NotFound} />
 	</Router>
 , app
 );
