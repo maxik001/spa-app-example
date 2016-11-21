@@ -9,9 +9,7 @@ export default class Login extends React.Component {
 	
 	render() {
 		return (
-			<div className="container">
-				<FormLogin />
-			</div>
+			<div><FormLogin /></div>
 		);
 	}
 }

@@ -1,18 +1,17 @@
 import React from 'react';
 
-import Content from '../components/content';
 import Footer from '../components/footer';
+import TopMenuSystem from '../components/top_menu_system';
 
 export default class LayoutSystem extends React.Component {
 	constructor(){
 		super();
-		this.name = "LayoutSystem";
 	}
 	
 	render() {
 		return (
 			<div className="container">
-				<Content />
+				<TopMenuSystem />
 				{this.props.children}
 				<Footer />
 			</div>

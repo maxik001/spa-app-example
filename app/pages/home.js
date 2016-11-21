@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Footer from '../components/footer';
+import TopMenu from '../components/top_menu';
+
 export default class Home extends React.Component {
 	constructor() {
 		super()
@@ -7,7 +10,11 @@ export default class Home extends React.Component {
 	
 	render() {
 		return (
-			<div>Home</div>
+			<div>
+				<TopMenu />
+				Главная страница
+				<Footer />
+			</div>
 		);
 	}
 }

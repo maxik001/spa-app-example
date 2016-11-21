@@ -14,9 +14,15 @@ import Reg from './pages/reg';
 const routes = {
 	path: "/",
 	component: LayoutGlobal,
+	indexRoute: { component: Home },
 	childRoutes: [
-        { path: "login", component: Login },
-        { path: "reg", component: Reg },
+        { 
+        	component: LayoutSystem,
+        	childRoutes: [
+    	        { path: "login", component: Login },
+        	    { path: "reg", component: Reg }
+        	]
+        },
         { path: "*", component: NotFound }
     ]
 }
