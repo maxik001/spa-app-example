@@ -7,14 +7,18 @@ import Login from './pages/login';
 import NotFound from './pages/not_found';
 import Reg from './pages/reg';
 
+const routes = {
+	path: "/",
+	component: Layout,
+	childRoutes: [
+        { path: "login", component: Login },
+        { path: "reg", component: Reg },
+        { path: "*", component: NotFound }
+    ]
+}
+
 const app = document.getElementById('app');
-ReactDOM.render(
-	<Router history={browserHistory}>
-		<Route path="/" component={Layout}>
-			<Route path="login" component={Login} />
-			<Route path="reg" component={Reg} /> 
-		</Route>
-		<Route path="*" component={NotFound} />
-	</Router>
+ReactDOM.render( 
+	<Router history={browserHistory} routes={routes} />
 , app
 );
