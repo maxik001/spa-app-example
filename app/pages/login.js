@@ -9,7 +9,15 @@ export default class Login extends React.Component {
 	
 	render() {
 		return (
-			<div><FormLogin /></div>
+			<div className="row">
+				<div className="col-md-4">
+				</div>
+				<div className="col-md-4">
+					<FormLogin />
+				</div>
+				<div className="col-md-4">
+				</div>
+			</div>
 		);
 	}
 }

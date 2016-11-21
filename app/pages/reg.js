@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FormReg from '../components/form_reg';
+
 export default class Reg extends React.Component {
 	constructor() {
 		super()
@@ -7,7 +9,15 @@ export default class Reg extends React.Component {
 	
 	render() {
 		return (
-			<h4>Reg</h4>
+			<div className="row">
+				<div className="col-md-3">
+				</div>
+				<div className="col-md-6">
+					<FormReg />
+				</div>
+				<div className="col-md-3">
+				</div>
+			</div>
 		);
 	}
 }

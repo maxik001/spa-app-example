@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Footer from '../components/footer';
 import TopMenuSystem from '../components/top_menu_system';
 
 export default class LayoutSystem extends React.Component {
@@ -10,10 +9,9 @@ export default class LayoutSystem extends React.Component {
 	
 	render() {
 		return (
-			<div className="container">
+			<div>
 				<TopMenuSystem />
 				{this.props.children}
-				<Footer />
 			</div>
 		);
 	}

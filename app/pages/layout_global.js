@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Footer from '../components/footer';
+
 export default class LayoutGlobal extends React.Component {
 	constructor(){
 		super();
@@ -9,6 +11,7 @@ export default class LayoutGlobal extends React.Component {
 		return (
 			<div className="container">
 				{this.props.children}
+				<Footer />
 			</div>
 		);
 	}

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Footer from '../components/footer';
 import TopMenu from '../components/top_menu';
 
 export default class Home extends React.Component {
@@ -13,7 +12,6 @@ export default class Home extends React.Component {
 			<div>
 				<TopMenu />
 				Главная страница
-				<Footer />
 			</div>
 		);
 	}
