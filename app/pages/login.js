@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FormLogin from '../components/form_login';
+
 export default class Login extends React.Component {
 	constructor() {
 		super()
@@ -7,7 +9,9 @@ export default class Login extends React.Component {
 	
 	render() {
 		return (
-			<h4>Login</h4>
+			<div className="container">
+				<FormLogin />
+			</div>
 		);
 	}
 }
