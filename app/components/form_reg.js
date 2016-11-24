@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Alert from './alert';
+
 import * as FormRegActions from '../actions/form_reg_actions';
 import FormRegStore from '../stores/form_reg_store'; 
 
@@ -37,13 +39,19 @@ export default class FromLogin extends React.Component {
 	}
 	
 	render() {
+		const formGroupClassName = this.state.isEmailValid?"form-group":"form-group has-error";
+		
 		return (
 			<form className="form-horizontal" onSubmit={this.handleSubmit}>
+
 				<fieldset>
 					<legend>Регистрация</legend>
+					
+					<Alert />
+						
 					<p>Укажите E-mail, на который необходимо отправить подтверждение регистрации</p>
-					<div className="form-group">
-						<label for="email" className="col-md-2">E-mail</label>
+					<div className={formGroupClassName}>
+						<label for="email" className="control-label col-md-2">E-mail</label>
 						<div className="col-md-10">
 							<input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange} className="form-control" id="email" />
 							{this.state.isEmailValid?"":<p className="text-danger">Значение не похоже на e-mail</p>}

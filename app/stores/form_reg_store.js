@@ -7,18 +7,31 @@ class FormRegStore extends EventEmitter {
 		super()
 	}
 	
-	/**
-	 * Process work with API
+	/*
+	 * 
 	 */
-	submitRegForm(email) {
-		console.log("Store receive email", email);
+	submitRegFormFail() {
+		console.log("Submit Fail");
+	}
+
+	submitRegFormOk() {
+		console.log("Submit Ok");
 	}
 	
+	/*
+	 * Action Switcher
+	 */
 	handleActions(action) {
 		switch(action.type) {
-			case "SUBMIT_REG_FORM": {
-				this.submitRegForm(action.email)
-			}		
+			case "SUBMIT_REG_FORM_OK": {
+				this.submitRegFormOk(action.email);
+				break;
+			}
+			case "SUBMIT_REG_FORM_FAIL": {
+				this.submitRegFormFail(action.email);
+				break;
+			}
+			
 		}
 	}
 }
