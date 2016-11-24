@@ -7,7 +7,7 @@ export default class FromLogin extends React.Component {
 	constructor() {
 		super();
 		
-		this.state = { email: "" };
+		this.state = { email: "", isEmailValid: true };
 		
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,7 +21,19 @@ export default class FromLogin extends React.Component {
 	
 	handleSubmit(event) {
 		event.preventDefault();
-		FormRegActions.submitForm(this.state.email);
+		
+		if(this.validateEmail(this.state.email)) {
+			this.setState({ isEmailValid: true });
+			
+			FormRegActions.submitForm(this.state.email);
+		} else {
+			this.setState({ isEmailValid: false });
+		}
+	}
+	
+	validateEmail(email) {
+	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
 	}
 	
 	render() {
@@ -33,7 +45,8 @@ export default class FromLogin extends React.Component {
 					<div className="form-group">
 						<label for="email" className="col-md-2">E-mail</label>
 						<div className="col-md-10">
-							<input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange} className="form-control" id="email" />
+							<input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange} className="form-control" id="email" />
+							{this.state.isEmailValid?"":<p className="text-danger">Значение не похоже на e-mail</p>}
 						</div>
 					</div>
 					<div className="form-group">
