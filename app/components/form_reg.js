@@ -9,33 +9,23 @@ export default class FromLogin extends React.Component {
 	constructor() {
 		super();
 		
-		var email = {
-			value: "",
-			isValid: true,
-			errorMsg: ""
+		this.state = { 
+			email: { value: "", isValid: true, errorMsg: "" },
+			form: { isSubmitSuccess: true, errorMsg: "" }
 		}
-		
-		var form = {
-			errorMsg: "",
-			isValis: true
-		}
-		
-		this.state = { email: email }
-		this.state = { form: form }
 		
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	componentWillMount() {
-		/*
 		FormRegStore.on(
 			"submit_fail",
 			() => {
-				this.setState({ this.state.email.isValid: false, this.state.email.errorMsg: "Email already used" })
+				console.log("Catch fail in component");
+				this.setState({ form: { isSubmitSuccess: false, errorMsg: "You pass invalid email" }});
 			}
 		);
-		*/
 	}
 	
 	handleEmailChange(event) {
@@ -48,11 +38,15 @@ export default class FromLogin extends React.Component {
 		event.preventDefault();
 		
 		if(this.validateEmail(this.state.email.value)) {
-			this.setState( email: { value: this.state.email.value, isValid: true } );
+			this.setState({ 
+				email: {isValid: true} 
+			});
 			
 			FormRegActions.submitForm(this.state.email.value);
 		} else {
-			this.setState( email: { isValid: false });
+			this.setState({ 
+				email: {isValid: false} 
+			});
 		}
 	}
 	
@@ -64,14 +58,16 @@ export default class FromLogin extends React.Component {
 	render() {
 		const formGroupClassName = this.state.email.isValid?"form-group":"form-group has-error";
 		
+		const alertMessage = this.state.form.isSubmitSuccess?"":<Alert type="danger" text="Hello" />;
+		
 		return (
 			<form className="form-horizontal" onSubmit={this.handleSubmit}>
 
 				<fieldset>
 					<legend>Регистрация</legend>
 					
-					<Alert text="Hello world!" type="danger" />
-						
+					{alertMessage}
+					
 					<p>Укажите E-mail, на который необходимо отправить подтверждение регистрации</p>
 					<div className={formGroupClassName}>
 						<label for="email" className="control-label col-md-2">E-mail</label>

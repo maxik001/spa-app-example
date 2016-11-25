@@ -12,6 +12,7 @@ class FormRegStore extends EventEmitter {
 	 */
 	submitRegFormFail() {
 		console.log("Submit Fail");
+		this.emit("submit_fail");
 	}
 
 	submitRegFormOk() {
