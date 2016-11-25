@@ -15,7 +15,7 @@ class FormRegStore extends EventEmitter {
 	}
 
 	submitRegFormOk() {
-		console.log("Submit Ok");
+		this.emit("submit_success");
 	}
 	
 	/*
