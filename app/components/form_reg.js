@@ -9,27 +9,50 @@ export default class FromLogin extends React.Component {
 	constructor() {
 		super();
 		
-		this.state = { email: "", isEmailValid: true };
+		var email = {
+			value: "",
+			isValid: true,
+			errorMsg: ""
+		}
+		
+		var form = {
+			errorMsg: "",
+			isValis: true
+		}
+		
+		this.state = { email: email }
+		this.state = { form: form }
 		
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
+	componentWillMount() {
+		/*
+		FormRegStore.on(
+			"submit_fail",
+			() => {
+				this.setState({ this.state.email.isValid: false, this.state.email.errorMsg: "Email already used" })
+			}
+		);
+		*/
+	}
+	
 	handleEmailChange(event) {
 		this.setState({
-			email: event.target.value
+			email: {value: event.target.value}
 		});
 	}
 	
 	handleSubmit(event) {
 		event.preventDefault();
 		
-		if(this.validateEmail(this.state.email)) {
-			this.setState({ isEmailValid: true });
+		if(this.validateEmail(this.state.email.value)) {
+			this.setState( email: { value: this.state.email.value, isValid: true } );
 			
-			FormRegActions.submitForm(this.state.email);
+			FormRegActions.submitForm(this.state.email.value);
 		} else {
-			this.setState({ isEmailValid: false });
+			this.setState( email: { isValid: false });
 		}
 	}
 	
@@ -39,7 +62,7 @@ export default class FromLogin extends React.Component {
 	}
 	
 	render() {
-		const formGroupClassName = this.state.isEmailValid?"form-group":"form-group has-error";
+		const formGroupClassName = this.state.email.isValid?"form-group":"form-group has-error";
 		
 		return (
 			<form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -53,8 +76,8 @@ export default class FromLogin extends React.Component {
 					<div className={formGroupClassName}>
 						<label for="email" className="control-label col-md-2">E-mail</label>
 						<div className="col-md-10">
-							<input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange} className="form-control" id="email" />
-							{this.state.isEmailValid?"":<p className="text-danger">Значение не похоже на e-mail</p>}
+							<input type="text" name="email" value={this.state.email.value} onChange={this.handleEmailChange} className="form-control" id="email" />
+							{this.state.email.isValid?"":<p className="text-danger">Значение не похоже на e-mail</p>}
 						</div>
 					</div>
 					<div className="form-group">
