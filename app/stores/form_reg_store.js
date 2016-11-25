@@ -11,7 +11,6 @@ class FormRegStore extends EventEmitter {
 	 * 
 	 */
 	submitRegFormFail() {
-		console.log("Submit Fail");
 		this.emit("submit_fail");
 	}
 
@@ -29,7 +28,7 @@ class FormRegStore extends EventEmitter {
 				break;
 			}
 			case "SUBMIT_REG_FORM_FAIL": {
-				this.submitRegFormFail(action.email);
+				this.submitRegFormFail();
 				break;
 			}
 			

@@ -17,8 +17,6 @@ export default class FromLogin extends React.Component {
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleSubmitFail = this.handleSubmitFail.bind(this);
-		
-		console.log("constructor");
 	}
 	
 	componentWillMount() {
@@ -26,9 +24,6 @@ export default class FromLogin extends React.Component {
 	}
 	
 	handleEmailChange(event) {
-		console.log("E state: ", this.state.email);
-		console.log("E value: ", event.target.value);
-		
 		this.setState({
 			email: {
 				value: event.target.value,
@@ -41,12 +36,10 @@ export default class FromLogin extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		
-		console.log("F state: ", this.state.email);
-		console.log("F value: ", event.target.value);
-		
 		if(this.validateEmail(this.state.email.value)) {
 			this.setState({ 
-				email: {value: this.state.email.value, isValid: true} 
+				email: {value: this.state.email.value, isValid: true},
+				form: { isSubmitSuccess: true, errorMsg: "" }
 			});
 			
 			FormRegActions.submitForm(this.state.email.value);
@@ -58,7 +51,7 @@ export default class FromLogin extends React.Component {
 	}
 	
 	handleSubmitFail() {
-		this.setState({ form: { isSubmitSuccess: false, errorMsg: "You pass invalid email" }});
+		this.setState({ form: { isSubmitSuccess: false, errorMsg: "Упс! Ошибка! Попробуйте чуть позже! " }});
 	}
 	
 	validateEmail(email) {
@@ -69,7 +62,7 @@ export default class FromLogin extends React.Component {
 	render() {
 		const formGroupClassName = this.state.email.isValid?"form-group":"form-group has-error";
 		
-		const alertMessage = this.state.form.isSubmitSuccess?"":<Alert type="danger" text="Hello" />;
+		const alertMessage = this.state.form.isSubmitSuccess?"":<Alert type="danger" text={this.state.form.errorMsg} />;
 		
 		return (
 			<form className="form-horizontal" onSubmit={this.handleSubmit}>
