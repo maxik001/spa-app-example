@@ -16,38 +16,49 @@ export default class FromLogin extends React.Component {
 		
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSubmitFail = this.handleSubmitFail.bind(this);
+		
+		console.log("constructor");
 	}
 	
 	componentWillMount() {
-		FormRegStore.on(
-			"submit_fail",
-			() => {
-				console.log("Catch fail in component");
-				this.setState({ form: { isSubmitSuccess: false, errorMsg: "You pass invalid email" }});
-			}
-		);
+		FormRegStore.on("submit_fail", this.handleSubmitFail);
 	}
 	
 	handleEmailChange(event) {
+		console.log("E state: ", this.state.email);
+		console.log("E value: ", event.target.value);
+		
 		this.setState({
-			email: {value: event.target.value}
+			email: {
+				value: event.target.value,
+				isValid: true,
+				errorMsg: ""
+			}
 		});
 	}
 	
 	handleSubmit(event) {
 		event.preventDefault();
 		
+		console.log("F state: ", this.state.email);
+		console.log("F value: ", event.target.value);
+		
 		if(this.validateEmail(this.state.email.value)) {
 			this.setState({ 
-				email: {isValid: true} 
+				email: {value: this.state.email.value, isValid: true} 
 			});
 			
 			FormRegActions.submitForm(this.state.email.value);
 		} else {
 			this.setState({ 
-				email: {isValid: false} 
+				email: {value: this.state.email.value, isValid: false} 
 			});
 		}
+	}
+	
+	handleSubmitFail() {
+		this.setState({ form: { isSubmitSuccess: false, errorMsg: "You pass invalid email" }});
 	}
 	
 	validateEmail(email) {
