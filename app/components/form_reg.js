@@ -47,7 +47,7 @@ export default class FromLogin extends React.Component {
 				<fieldset>
 					<legend>Регистрация</legend>
 					
-					<Alert />
+					<Alert text="Hello world!" type="danger" />
 						
 					<p>Укажите E-mail, на который необходимо отправить подтверждение регистрации</p>
 					<div className={formGroupClassName}>
