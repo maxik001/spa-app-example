@@ -1,5 +1,7 @@
 import Dispatcher from '../dispatcher';
 
+import api_config from '../config/api_config.json';
+
 export function submitForm(email) {
 	const validEmail = "test@test.ru";
 	

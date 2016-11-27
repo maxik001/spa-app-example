@@ -9,7 +9,7 @@ import LayoutSystem from './pages/layout_system';
 import Login from './pages/login';
 import NotFound from './pages/not_found';
 import Reg from './pages/reg';
-
+import Test from './pages/test';
 
 const routes = {
 	path: "/",
@@ -20,7 +20,8 @@ const routes = {
         	component: LayoutSystem,
         	childRoutes: [
     	        { path: "login", component: Login },
-        	    { path: "reg", component: Reg }
+        	    { path: "reg", component: Reg },
+        	    { path: "test", component: Test }
         	]
         },
         { path: "*", component: NotFound }
