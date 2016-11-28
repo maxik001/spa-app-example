@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import api_config from '../config/api_config.json';
 
@@ -9,6 +10,7 @@ export default class Login extends React.Component {
 		super()
 		
 		this.api_test = this.api_test.bind(this);
+		this.handleRedirect = this.handleRedirect.bind(this);		
 	}
 
 	api_test() {
@@ -32,6 +34,11 @@ export default class Login extends React.Component {
 		});
 	}
 	
+	handleRedirect() {
+		console.log("Handle Redirect");
+		browserHistory.push('/')
+	}
+	
 	render() {
 		this.api_test();
 		
@@ -39,6 +46,9 @@ export default class Login extends React.Component {
 			<div className="row">
 				<div className="col-md-12">
 					Test page. See console log.
+				</div>
+				<div className="col-md-12">
+					<button onClick={this.handleRedirect}>Redirect to main page</button>
 				</div>
 			</div>
 		);
