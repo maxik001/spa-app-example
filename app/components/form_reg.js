@@ -29,6 +29,14 @@ export default class FromLogin extends React.Component {
 		FormRegStore.on("submit_fail", this.handleSubmitFail);
 		FormRegStore.on("submit_process", this.handleSubmitProcess);
 		FormRegStore.on("submit_success", this.handleSubmitSuccess);
+		
+		console.log("count ", FormRegStore.listenerCount("submit_fail"));
+	}
+	
+	componentWillUnmount() {
+		FormRegStore.removeListener("submit_fail", this.handleSubmitFail);
+		FormRegStore.removeListener("submit_process", this.handleSubmitProcess);
+		FormRegStore.removeListener("submit_success", this.handleSubmitSuccess);
 	}
 	
 	handleEmailChange(event) {
