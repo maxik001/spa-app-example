@@ -107,7 +107,7 @@ export default class FromReg extends React.Component {
 					<form className="form-horizontal">
 						<fieldset>
 							<legend>Регистрация</legend>
-							<Alert type="success" text="Ваш запрос обрабатывается. Подождите пожалуйста..." />
+							<Alert type="warning" text="Ваш запрос обрабатывается. Подождите пожалуйста..." />
 						</fieldset>
 					</form>					
 				);
@@ -118,7 +118,7 @@ export default class FromReg extends React.Component {
 					<form className="form-horizontal">
 						<fieldset>
 							<legend>Регистрация</legend>
-							<Alert type="success" text="Отлично! В ближайшее время на указанный вами e-mail будет отправлено письмо для подтверждения регистрации." />
+							<Alert type="success" text="Отлично! В ближайшее время, на указанный вами e-mail, будет отправлено письмо для подтверждения регистрации." />
 						</fieldset>
 					</form>					
 				);				

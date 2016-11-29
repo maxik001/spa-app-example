@@ -18,30 +18,24 @@ export function submitForm(email) {
 		withCredentials: false
 	};
 
-	/*
+	Dispatcher.dispatch({type: "FORM_REG_PROCESS"});
+	
 	Axios(apiServerConfig)
 	.then(function (response) {
 		switch(response.status) {
 			case 202: {
-				Dispatcher.dispatch({type: "SUBMIT_REG_FORM_OK"});
+				Dispatcher.dispatch({type: "FORM_REG_SUBMIT_SUCCESS"});
 				break;
 			}
 			case 503:
 			case 422:
 			{
-				Dispatcher.dispatch({type: "SUBMIT_REG_FORM_FAIL"});
+				Dispatcher.dispatch({type: "FORM_REG_SUBMIT_FAIL"});
 				break;
 			}
 		}
 	})
 	.catch(function (error) {
-		Dispatcher.dispatch({type: "SUBMIT_REG_FORM_FAIL"});
+		Dispatcher.dispatch({type: "FORM_REG_SUBMIT_FAIL"});
 	});
-	*/
-	
-	Dispatcher.dispatch({type: "SUBMIT_REG_FORM_PROCESS"});
-	setTimeout(() => {
-		Dispatcher.dispatch({type: "SUBMIT_REG_FORM_OK"})
-	}, 5000);
-	
 }

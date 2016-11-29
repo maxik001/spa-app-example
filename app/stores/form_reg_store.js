@@ -8,35 +8,20 @@ class FormRegStore extends EventEmitter {
 	}
 	
 	/*
-	 * 
-	 */
-	submitRegFormFail() {
-		this.emit("submit_fail");
-	}
-
-	submitRegFormOk() {
-		this.emit("submit_success");
-	}
-	
-	submitRegFormProcess() {
-		this.emit("submit_process");
-	}
-
-	/*
 	 * Action Switcher
 	 */
 	handleActions(action) {
 		switch(action.type) {
-			case "SUBMIT_REG_FORM_OK": {
-				this.submitRegFormOk();
+			case "FORM_REG_SUBMIT_SUCCESS": {
+				this.emit("submit_success");
 				break;
 			}
-			case "SUBMIT_REG_FORM_FAIL": {
-				this.submitRegFormFail();
+			case "FORM_REG_SUBMIT_FAIL": {
+				this.emit("submit_fail");
 				break;
 			}
-			case "SUBMIT_REG_FORM_PROCESS": {
-				this.submitRegFormProcess();
+			case "FORM_REG_PROCESS": {
+				this.emit("submit_process");
 				break;
 			}
 		}
