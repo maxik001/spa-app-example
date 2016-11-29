@@ -5,16 +5,13 @@ import Alert from './alert';
 import * as FormRegActions from '../actions/form_reg_actions';
 import FormRegStore from '../stores/form_reg_store'; 
 
-export default class FromLogin extends React.Component {
+export default class FromReg extends React.Component {
 	constructor() {
 		super();
 		
-		// Available form statuses:
-		// initial, process, completed
-		
 		this.state = {
 			email: {value: "", isValid: true, errorMsg: ""},
-			submitStatus: "initial", 
+			submitStatus: "initial", // Available status: initial, process, completed
 			hasError: false
 		};
 		
@@ -29,8 +26,6 @@ export default class FromLogin extends React.Component {
 		FormRegStore.on("submit_fail", this.handleSubmitFail);
 		FormRegStore.on("submit_process", this.handleSubmitProcess);
 		FormRegStore.on("submit_success", this.handleSubmitSuccess);
-		
-		console.log("count ", FormRegStore.listenerCount("submit_fail"));
 	}
 	
 	componentWillUnmount() {

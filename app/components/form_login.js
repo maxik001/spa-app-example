@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class FromReg extends React.Component {
+export default class FromLogin extends React.Component {
 	constructor() {
 		super();
 	}
