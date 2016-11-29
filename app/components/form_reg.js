@@ -50,7 +50,7 @@ export default class FromReg extends React.Component {
 	}
 	
 	handleSubmitFail() {
-		this.setState({submitStatus: "completed"});
+		this.setState({submitStatus: "initial"});
 		this.setState({hasError: true});
 	}
 	
@@ -75,14 +75,15 @@ export default class FromReg extends React.Component {
 			case "initial": {
 				const formGroupClassName = this.state.email.isValid?"form-group":"form-group has-error";
 				
-				const alertMessage = this.state.hasError?<Alert type="danger" text="Ошибка" />:"";
+				const alertMessage = "Упс! Что-то пошло не так! Попробуйте, пожалуйста, чуть позже."
+				const alertBox = this.state.hasError?<Alert type="danger" text={alertMessage} />:"";
 				
 				return(
 					<form className="form-horizontal" onSubmit={this.handleSubmit}>
 						<fieldset>
 							<legend>Регистрация</legend>
 							
-							{alertMessage}
+							{alertBox}
 							
 							<p>Укажите E-mail, на который необходимо отправить подтверждение регистрации</p>
 							<div className={formGroupClassName}>
