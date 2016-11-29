@@ -4,9 +4,9 @@ import Dispatcher from '../dispatcher';
 import api_config from '../config/api_config.json';
 
 export function submitForm(email) {
-	const validEmail = "test@test.ru";
-
 	const apiBaseURL = api_config.server.protocol+"://"+api_config.server.ip+":"+api_config.server.port;
+	
+	var email = 'test@test.ru'; // Remove after test
 	
 	var postPayload = {data: {email:email}};
 	
@@ -17,24 +17,31 @@ export function submitForm(email) {
 		data: postPayload,
 		withCredentials: false
 	};
-	
+
+	/*
 	Axios(apiServerConfig)
 	.then(function (response) {
-		console.log("response", response);
-		console.log("response data ", JSON.stringify(response.data));
+		switch(response.status) {
+			case 202: {
+				Dispatcher.dispatch({type: "SUBMIT_REG_FORM_OK"});
+				break;
+			}
+			case 503:
+			case 422:
+			{
+				Dispatcher.dispatch({type: "SUBMIT_REG_FORM_FAIL"});
+				break;
+			}
+		}
 	})
 	.catch(function (error) {
-		console.log("error", error);
+		Dispatcher.dispatch({type: "SUBMIT_REG_FORM_FAIL"});
 	});
+	*/
 	
-	if(email === validEmail) {
-		Dispatcher.dispatch({
-			type: "SUBMIT_REG_FORM_OK"
-		});
-	} else {
-		Dispatcher.dispatch({
-			type: "SUBMIT_REG_FORM_FAIL"
-		});
-	}
+	Dispatcher.dispatch({type: "SUBMIT_REG_FORM_PROCESS"});
+	setTimeout(() => {
+		Dispatcher.dispatch({type: "SUBMIT_REG_FORM_OK"})
+	}, 5000);
 	
 }

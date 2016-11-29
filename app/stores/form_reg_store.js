@@ -18,20 +18,27 @@ class FormRegStore extends EventEmitter {
 		this.emit("submit_success");
 	}
 	
+	submitRegFormProcess() {
+		this.emit("submit_process");
+	}
+
 	/*
 	 * Action Switcher
 	 */
 	handleActions(action) {
 		switch(action.type) {
 			case "SUBMIT_REG_FORM_OK": {
-				this.submitRegFormOk(action.email);
+				this.submitRegFormOk();
 				break;
 			}
 			case "SUBMIT_REG_FORM_FAIL": {
 				this.submitRegFormFail();
 				break;
 			}
-			
+			case "SUBMIT_REG_FORM_PROCESS": {
+				this.submitRegFormProcess();
+				break;
+			}
 		}
 	}
 }

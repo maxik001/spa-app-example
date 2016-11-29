@@ -14,7 +14,7 @@ export default class Login extends React.Component {
 	}
 
 	api_test() {
-		var body = {data: {email:'maxgusev@gmail.com'}};
+		var body = {data: {email:'test@test.ru'}};
 		
 		const api_server_config = {
 			method: 'post',
