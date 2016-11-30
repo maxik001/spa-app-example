@@ -22,7 +22,7 @@ export default class FormSignup extends React.Component {
 		FormSignupStore.on('hash_valid', this.handleHashValid);
 		FormSignupStore.on('hash_invalid', this.handleHashInvalid);
 		
-		if(this.props.params.hash) { FormSignupActions.onEnter(this.props.params.hash); }
+		if(this.props.params.hash) { FormSignupActions.validateHash(this.props.params.hash); }
 	}
 	
 	componentWillUnmount() {
