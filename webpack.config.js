@@ -2,6 +2,8 @@
  * Fiename: webpack.config.js
  */
 
+var webpack = require('webpack');
+
 module.exports = {
 	context: __dirname + "/app",
 	entry: "./app.js",
@@ -25,6 +27,9 @@ module.exports = {
 	  		}
 	  	]
 	},
+	plugins: [
+      	new webpack.optimize.UglifyJsPlugin({minimize: true})
+    ],
 	devServer: {
 		historyApiFallback: {
 			index: '/index.html'
