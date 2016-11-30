@@ -6,10 +6,16 @@ import Home from './pages/home';
 import LayoutGlobal from './pages/layout_global';
 import LayoutMain from './pages/layout_main';
 import LayoutSystem from './pages/layout_system';
-import Login from './pages/login';
 import NotFound from './pages/not_found';
-import Reg from './pages/reg';
 import Test from './pages/test';
+
+// Components
+import formLogin from './components/form_login';
+import formReg from './components/form_reg';
+import formSignup from './components/form_signup';
+
+
+// Layouts
 
 const routes = {
 	path: "/",
@@ -19,9 +25,16 @@ const routes = {
         { 
         	component: LayoutSystem,
         	childRoutes: [
-    	        { path: "login", component: Login },
-        	    { path: "reg", component: Reg },
         	    { path: "test", component: Test }
+        	]
+        },
+        {
+        	path: "/system",
+        	component: LayoutSystem,
+        	childRoutes: [
+    	        { path: "login", component: formLogin },
+        	    { path: "reg", component: formReg },
+        	    { path: "signup/:hash", component: formSignup }
         	]
         },
         { path: "*", component: NotFound }

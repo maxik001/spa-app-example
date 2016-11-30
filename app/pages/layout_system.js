@@ -11,7 +11,15 @@ export default class LayoutSystem extends React.Component {
 		return (
 			<div>
 				<TopMenuSystem />
-				{this.props.children}
+				
+				<div className="row">
+					<div className="col-md-3"></div>
+					<div className="col-md-6">
+						{this.props.children}
+					</div>
+					<div className="col-md-3"></div>
+				</div>				
+				
 			</div>
 		);
 	}

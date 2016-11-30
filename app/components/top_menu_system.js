@@ -13,8 +13,8 @@ export default class TopMenu extends React.Component {
 					<li role="presentation"><Link to="/">AMHub</Link></li>
 				</ul>
 				<ul className="nav nav-pills pull-right">
-					<li role="presentation"><Link to="login">Войти</Link></li>
-					<li role="presentation"><Link to="reg">Зарегистрироваться</Link></li>
+					<li role="presentation"><Link to="/system/login">Войти</Link></li>
+					<li role="presentation"><Link to="/system/reg">Зарегистрироваться</Link></li>
 				</ul>
 			</div>
 		);
