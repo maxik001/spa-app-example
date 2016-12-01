@@ -21,7 +21,7 @@ class FormSignupStore extends EventEmitter {
 				break;
 			}
 			case "FORM_SIGNUP_VALID_HASH": {
-				this.emit("hash_valid");
+				this.emit("hash_valid", action.email);
 				break;
 			}
 		}

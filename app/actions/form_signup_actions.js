@@ -18,7 +18,7 @@ export function validateHash(hash) {
 	Axios(apiServerConfig)
 	.then(function (response) {
 		switch(response.status) {
-			case 200: { Dispatcher.dispatch({type: "FORM_SIGNUP_VALID_HASH"}); break; }
+			case 200: { Dispatcher.dispatch({type: "FORM_SIGNUP_VALID_HASH", email: response.data.data.email }); break; }
 			case 404: { Dispatcher.dispatch({type: "FORM_SIGNUP_INVALID_HASH"}); break; }
 		}
 	})
