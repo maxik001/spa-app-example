@@ -38,11 +38,6 @@ export default class FormSignup extends React.Component {
 		FormSignupStore.removeListener('hash_invalid', this.handleHashInvalid);
 	}
 	
-	comparePassFields(val1, val2) {
-		if(val1 === val2) { return true; }
-		else { return false; }
-	}
-	
 	handleHashValid(email) {
 		this.setState({email:email});
 	}
@@ -70,8 +65,11 @@ export default class FormSignup extends React.Component {
 			this.setState({nickname: {value: this.state.nickname.value, isValid: false, errorMsg: "Заполните пожалуйста это поле"}});
 		}
 		
+		if(this.state.password1.value == "" && this.state.password2.value == "") {
+			this.setState({password2: {value: this.state.password2.value, isValid: false, errorMsg: "Необходимо указать пароль для доступа"}});
+		}
 		
-		if(!this.comparePassFields(this.state.password1.value, this.state.password2.value)) {
+		if(this.state.password1.value != this.state.password2.value) {
 			this.setState({password2: {value: this.state.password2.value, isValid: false, errorMsg: "Пароли не совпадают"}});
 		}
 	}
