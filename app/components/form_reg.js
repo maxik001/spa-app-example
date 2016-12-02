@@ -87,7 +87,7 @@ export default class FromReg extends React.Component {
 							
 							<p>Укажите E-mail, на который необходимо отправить подтверждение регистрации</p>
 							<div className={formGroupClassName}>
-								<label for="email" className="control-label col-md-2">E-mail</label>
+								<label htmlFor="email" className="control-label col-md-2">E-mail</label>
 								<div className="col-md-10">
 									<input type="text" name="email" value={this.state.email.value} onChange={this.handleEmailChange} className="form-control" id="email" />
 									{this.state.email.isValid?"":<p className="text-danger">Значение не похоже на e-mail</p>}

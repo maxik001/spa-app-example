@@ -27,6 +27,7 @@ module.exports = {
 	  		}
 	  	]
 	},
+/*	
 	plugins: [
       	new webpack.optimize.UglifyJsPlugin({
       		minimize: true, 
@@ -35,6 +36,7 @@ module.exports = {
       		}
       	})
     ],
+*/    
 	devServer: {
 		historyApiFallback: {
 			index: '/index.html'

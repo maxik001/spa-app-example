@@ -16,14 +16,28 @@ class FormSignupStore extends EventEmitter {
 				this.emit("hash_invalid");
 				break;
 			}
-			case "FORM_SIGNUP_PROCESS": {
-				this.emit("submit_process");
+			case "FORM_SIGNUP_LOAD_PROCESS": {
+				this.emit("load_process");
 				break;
 			}
 			case "FORM_SIGNUP_VALID_HASH": {
 				this.emit("hash_valid", action.email);
 				break;
 			}
+						
+			case "FORM_SIGNUP_SUBMIT_FAIL": {
+				this.emit("submit_fail");
+				break;
+			}
+			case "FORM_SIGNUP_SUBMIT_PROCESS": {
+				this.emit("submit_process");
+				break;
+			}
+			case "FORM_SIGNUP_SUBMIT_SUCCESS": {
+				this.emit("submit_success");
+				break;
+			}
+
 		}
 	}
 }
