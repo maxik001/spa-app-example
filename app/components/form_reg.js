@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingAnimation from 'react-loading-animation';
 
 import Alert from './alert';
 
@@ -109,6 +110,7 @@ export default class FromReg extends React.Component {
 						<fieldset>
 							<legend>Регистрация</legend>
 							<Alert type="warning" text="Ваш запрос обрабатывается. Подождите пожалуйста..." />
+							<LoadingAnimation />
 						</fieldset>
 					</form>					
 				);

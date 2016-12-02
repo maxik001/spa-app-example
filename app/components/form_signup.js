@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingAnimation from 'react-loading-animation';
 
 import Alert from './alert';
 
@@ -169,6 +170,7 @@ export default class FormSignup extends React.Component {
 							<fieldset>
 								<legend>Подтверждение регистрации</legend>
 								<Alert type="warning" text="Ваш запрос обрабатывается. Подождите пожалуйста..." />
+								<LoadingAnimation />
 							</fieldset>
 						</form>					
 					);					
