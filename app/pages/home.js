@@ -12,7 +12,6 @@ export default class Home extends React.Component {
 		return (
 			<div>
 				<TopMenu />
-				<BarRandomNumbers updateInterval="10" />
 				Главная страница
 			</div>
 		);
