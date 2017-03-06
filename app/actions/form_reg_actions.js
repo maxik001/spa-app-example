@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import Dispatcher from '../dispatcher';
 
-import api_config from '../config/api_config.json';
+import api_config from '../config/config_api.json';
 
 export function submitForm(email) {
 	const apiBaseURL = api_config.server.protocol+"://"+api_config.server.ip+":"+api_config.server.port;

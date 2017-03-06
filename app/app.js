@@ -1,56 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Components
-import formLogin from './components/form_login';
-import formRecovery from './components/form_recovery';
-import formReg from './components/form_reg';
-import formSignup from './components/form_signup';
+import formLogin from './components/form_login'
+import formRecovery from './components/form_recovery'
+import formRecoveryLastPhase from './components/form_recovery_last_phase'
+import helloWorld from './components/hello_world'
+import pageNotFound from './components/page_not_found'
 
 // Layouts
-import Home from './pages/home';
-import LayoutGlobal from './pages/layout_global';
-import LayoutMain from './pages/layout_main';
-import LayoutSystem from './pages/layout_system';
-import NotFound from './pages/not_found';
-import Test from './pages/test';
+import layoutGlobal from './pages/layout_global'
 
 const routes = {
-	path: "/",
-	component: LayoutGlobal,
-	indexRoute: { component: Home },
+  path: "/",
+	component: layoutGlobal,
+	indexRoute: { component: helloWorld },
 	childRoutes: [
-        { 
-        	component: LayoutSystem,
-        	childRoutes: [
-        	    { path: "test", component: Test }
-        	]
-        },
-        {
-        	path: "/system",
-        	component: LayoutSystem,
-        	childRoutes: [
-    	        { path: "login", component: formLogin },
-    	        { path: "recovery", component: formRecovery },
-        	    { path: "reg", component: formReg },
-        	    { path: "signup/:hash", component: formSignup }
-        	]
-        },
-        { path: "*", component: NotFound }
-    ]
+    { path: "login", component: formLogin },
+    { path: "recovery", component: formRecovery },
+    { path: 'recovery/:hash', component: formRecoveryLastPhase },
+    { path: "*", component: pageNotFound }
+  ]
 }
 
-
-/*
-const routes = {
-	path: "/",
-	component: LayoutGlobal
-}
-*/
-
-const app = document.getElementById('app');
+const app = document.getElementById('react-root')
 ReactDOM.render( 
 	<Router history={browserHistory} routes={routes} />
-, app
-);
+	,app
+)
