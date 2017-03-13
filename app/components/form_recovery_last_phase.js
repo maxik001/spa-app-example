@@ -5,7 +5,7 @@ import LoadingAnimation from 'react-loading-animation'
 
 //Pages
 import Alert from './alert'
-import PageNotFound from '../components/page_not_found'
+import PageNotFound from './page_not_found'
 
 // Actions and Store
 import * as actionsFormRecoveryLastPhase from '../actions/actions_form_recovery_last_phase'
