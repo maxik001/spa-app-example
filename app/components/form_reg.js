@@ -2,7 +2,6 @@ import React from 'react'
 import LoadingAnimation from 'react-loading-animation'
 
 import Alert from './alert'
-
 import isEmail from '../libs/email_validator'
 
 import * as actionsFormReg from '../actions/actions_form_reg'
@@ -98,11 +97,6 @@ export default class FromReg extends React.Component {
     
     return new Promise(function(resolve, reject) { resolve() })
   }
-	
-	validateNickname(nickname) {
-	  if(nickname) return true
-	  return false
-	}
 	
 	render() {
     switch(this.state.submitState) {

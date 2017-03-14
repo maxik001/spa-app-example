@@ -47,21 +47,14 @@ export default class formRecovery extends React.Component {
   handleFormSubmit(event) {
     event.preventDefault()
 
-    if(this.state.email.value === "") {
-      this.setState({email: {value: this.state.email.value, isValid: false, errorMsg: "Заполните пожалуйста E-mail"}})
-    }    
-    
-    if(this.state.email.value !== "" && this.validateEmail(this.state.email.value)) {
+    this.validateForm().then(function () {
       this.setState({email: {value: this.state.email.value, isValid: true}})
 
       actionsFormRecovery.submitForm({
         email: this.state.email.value
       })
-    } else {
-      this.setState({email: {value: this.state.email.value, isValid: false, errorMsg: "Значение не похоже на E-mail"}})
-    }
+    })
   }
-  
   
   handleSubmitFail() {
     this.setState({submitState: "finished", submitStatus: "error"})
@@ -74,11 +67,22 @@ export default class formRecovery extends React.Component {
   handleSubmitSuccess() {
     this.setState({submitState: "finished", submitStatus: "success"})
   }
-
-  validateEmail(email) {
-    return isEmail(email)
-  }
   
+  validateForm() {
+    var hasError = false
+    
+    if(!isEmail(this.state.email.value)) {
+      this.setState({
+        email: { value: this.state.email.value, isValid: false, errorMsg: "Значение не похоже на E-mail" }
+      })
+      hasError = true
+    }  
+
+    if(hasError) return new Promise(function(resolve, reject) { reject() })
+    
+    return new Promise(function(resolve, reject) { resolve() })
+  }
+
   render() {
     switch(this.state.submitState) {
       case "initial": {    
