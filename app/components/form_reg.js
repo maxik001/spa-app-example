@@ -1,132 +1,179 @@
-import React from 'react';
-import LoadingAnimation from 'react-loading-animation';
+import React from 'react'
+import LoadingAnimation from 'react-loading-animation'
 
-import Alert from './alert';
+import Alert from './alert'
 
-import * as FormRegActions from '../actions/form_reg_actions';
-import FormRegStore from '../stores/form_reg_store'; 
+import isEmail from '../libs/email_validator'
+
+import * as actionsFormReg from '../actions/actions_form_reg'
+import storeFormReg from '../stores/store_form_reg'
 
 export default class FromReg extends React.Component {
 	constructor() {
-		super();
+		super()
 		
 		this.state = {
-			email: {value: "", isValid: true, errorMsg: ""},
-			submitStatus: "initial", // Available status: initial, process, completed
-			hasError: false
-		};
+      submitState: "initial", // Available state: initial, process, finished
+      submitStatus: null, // Available status: success, error
+      email: { value: '', isValid: true, errorMsg: '' },
+		  nickname: { value: '', isValid: true, errorMsg: '' }
+		}
 		
-		this.handleEmailChange = this.handleEmailChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleSubmitFail = this.handleSubmitFail.bind(this);
-		this.handleSubmitProcess = this.handleSubmitProcess.bind(this);
-		this.handleSubmitSuccess = this.handleSubmitSuccess.bind(this);
+		this.handleEmailChange = this.handleEmailChange.bind(this)
+		this.handleNicknameChange = this.handleNicknameChange.bind(this)
+		
+		this.handleFormSubmit = this.handleFormSubmit.bind(this)
+		
+		this.handleSubmitFail = this.handleSubmitFail.bind(this)
+		this.handleSubmitProcess = this.handleSubmitProcess.bind(this)
+		this.handleSubmitSuccess = this.handleSubmitSuccess.bind(this)
 	}
 	
 	componentWillMount() {
-		FormRegStore.on("submit_fail", this.handleSubmitFail);
-		FormRegStore.on("submit_process", this.handleSubmitProcess);
-		FormRegStore.on("submit_success", this.handleSubmitSuccess);
+		storeFormReg.on("submit_fail", this.handleSubmitFail)
+		storeFormReg.on("submit_process", this.handleSubmitProcess)
+		storeFormReg.on("submit_success", this.handleSubmitSuccess)
 	}
 	
 	componentWillUnmount() {
-		FormRegStore.removeListener("submit_fail", this.handleSubmitFail);
-		FormRegStore.removeListener("submit_process", this.handleSubmitProcess);
-		FormRegStore.removeListener("submit_success", this.handleSubmitSuccess);
+		storeFormReg.removeListener("submit_fail", this.handleSubmitFail)
+		storeFormReg.removeListener("submit_process", this.handleSubmitProcess)
+		storeFormReg.removeListener("submit_success", this.handleSubmitSuccess)
 	}
 	
 	handleEmailChange(event) {
-		this.setState({email: {value: event.target.value, isValid: true, errorMsg: ""}});
+		this.setState({ email: { value: event.target.value, isValid: true, errorMsg: '' }})
 	}
 	
-	handleSubmit(event) {
-		event.preventDefault();
+	handleNicknameChange(event) {
+	  this.setState({ nickname: { value: event.target.value, isValid: true, errorMsg: '' }})
+	}
+	
+	handleFormSubmit(event) {
+		event.preventDefault()
 		
-		if(this.validateEmail(this.state.email.value)) {
-			this.setState({email: {value: this.state.email.value, isValid: true}});
-			FormRegActions.submitForm(this.state.email.value);
-		} else {
-			this.setState({email: {value: this.state.email.value, isValid: false}});
-		}
+		this.validateForm().then(function() {
+      this.setState({
+        email: {value: this.state.email.value, isValid: true},
+        nickname: {value: this.state.nickname.value, isValid: true}
+      })
+      
+      actionsFormReg.submitForm({ email: this.state.email.value, nickname: this.state.nickname.value })
+		}) 
 	}
 	
 	handleSubmitFail() {
-		this.setState({submitStatus: "initial"});
-		this.setState({hasError: true});
+		this.setState({submitStatus: "initial"})
+		this.setState({hasError: true})
 	}
 	
 	handleSubmitProcess() {
-		this.setState({submitStatus: "process"});
-		this.setState({submitInProcess: true});
+		this.setState({submitStatus: "process"})
+		this.setState({submitInProcess: true})
 	}
 	
 	handleSubmitSuccess() {
-		this.setState({submitStatus: "completed"});
-		this.setState({hasError: false});
+		this.setState({submitStatus: "completed"})
+		this.setState({hasError: false})
 	}
 
+	validateForm() {
+	  var hasError = false
+	  
+    if(!isEmail(this.state.email.value)) {
+      this.setState({
+        email: { value: this.state.email.value, isValid: false, errorMsg: "Значение не похоже на E-mail" }
+      })
+      hasError = true
+    }  
+    
+    if(this.state.nickname.value === '') {
+      this.setState({
+        nickname: { value: this.state.nickname.value, isValid: false, errorMsg: "Заполните пожалуйста Nickname" }
+      })
+      hasError = true
+    }    
+	  
+    if(hasError) return new Promise(function(resolve, reject) { reject() })
+    
+    return new Promise(function(resolve, reject) { resolve() })
+  }
 	
-	validateEmail(email) {
-	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    return re.test(email);
+	validateNickname(nickname) {
+	  if(nickname) return true
+	  return false
 	}
 	
 	render() {
-		switch(this.state.submitStatus) {
-			case "initial": {
-				const formGroupClassName = this.state.email.isValid?"form-group":"form-group has-error";
-				
-				const alertMessage = "Упс! Что-то пошло не так! Попробуйте, пожалуйста, чуть позже."
-				const alertBox = this.state.hasError?<Alert type="danger" text={alertMessage} />:"";
-				
-				return(
-					<form className="form-horizontal" onSubmit={this.handleSubmit}>
-						<fieldset>
-							<legend>Регистрация</legend>
-							
-							{alertBox}
-							
-							<p>Укажите E-mail, на который необходимо отправить подтверждение регистрации</p>
-							<div className={formGroupClassName}>
-								<label htmlFor="email" className="control-label col-md-2">E-mail</label>
-								<div className="col-md-10">
-									<input type="text" name="email" value={this.state.email.value} onChange={this.handleEmailChange} className="form-control" id="email" />
-									{this.state.email.isValid?"":<p className="text-danger">Значение не похоже на e-mail</p>}
-								</div>
-							</div>
-							<div className="form-group">
-								<div className="col-md-offset-3 col-md-8">
-									<button type="submit" value="submit" className="btn btn-success col-md-12">Зарегистрироваться</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>		
-				);				
-				break;
-			}
-			case "process": {
-				return(
-					<form className="form-horizontal">
-						<fieldset>
-							<legend>Регистрация</legend>
-							<Alert type="warning" text="Ваш запрос обрабатывается. Подождите пожалуйста..." />
-							<LoadingAnimation />
-						</fieldset>
-					</form>					
-				);
-				break;
-			}
-			case "completed": {
-				return(
-					<form className="form-horizontal">
-						<fieldset>
-							<legend>Регистрация</legend>
-							<Alert type="success" text="Отлично! В ближайшее время, на указанный вами e-mail, будет отправлено письмо для подтверждения регистрации." />
-						</fieldset>
-					</form>					
-				);				
-				break;
-			}
-		}
+    switch(this.state.submitState) {
+      case "initial": {
+        return(
+          <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
+            <fieldset>
+              <legend>Регистрация</legend>
+              
+              <div className={this.state.email.isValid?"form-group":"form-group has-error"}>
+                <label htmlFor="inputEmail" className="col-md-2 control-label">E-mail</label>
+                <div className="col-md-6">
+                  <input className="form-control" id="inputEmail" name="email" placeholder="Email" type="text" value={this.state.email.value} onChange={this.handleEmailChange} />
+                  {this.state.email.isValid?"":<p className="text-danger">{this.state.email.errorMsg}</p>}
+                </div>
+              </div>
+
+              <div className={this.state.nickname.isValid?"form-group":"form-group has-error"}>
+                <label htmlFor="inputNickname" className="col-md-2 control-label">Nickname</label>
+                <div className="col-md-6">
+                  <input className="form-control" id="inputNickname" name="nickname" placeholder="Nickname" type="text" value={this.state.nickname.value} onChange={this.handleNicknameChange} />
+                  {this.state.nickname.isValid?"":<p className="text-danger">{this.state.nickname.errorMsg}</p>}
+                </div>
+              </div>
+
+              <div className="form-group">
+                <div className="col-md-4 col-md-offset-2">
+                  <button type="submit" value="submit" className="btn btn-info col-md-6">Зарегистрироваться</button>
+                </div>
+              </div>
+              
+            </fieldset>
+          </form>
+        )
+      }
+      case "process": {
+        return (
+          <form className="form-horizontal">
+            <fieldset>
+              <legend>Регистрация</legend>
+              <Alert type="warning" text="Ваш запрос обрабатывается. Подождите пожалуйста..." />
+              <LoadingAnimation />
+            </fieldset>
+          </form>               
+        )       
+        break
+      }      
+      case "finished": {
+        if(this.state.submitStatus == "error") {
+          return (
+            <form className="form-horizontal">
+              <fieldset>
+                <legend>Регистрация</legend>
+                <Alert type="warning" text="API сервер недоступен. Попробуйте, пожалуйста, чуть позже..." />
+                <LoadingAnimation />
+              </fieldset>
+            </form>               
+          )
+        } else if(this.state.submitStatus == "success") {
+          return (
+            <form className="form-horizontal">
+              <fieldset>
+                <legend>Регистрация</legend>
+                <Alert type="success" text="На указанный вами e-mail отправлено письмо для завершения регистрации. Спасибо." />
+                <LoadingAnimation />
+              </fieldset>
+            </form>               
+          )
+        }
+        break
+      }      
+    }
 	}
 }

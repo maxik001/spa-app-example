@@ -6,6 +6,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import formLogin from './components/form_login'
 import formRecovery from './components/form_recovery'
 import formRecoveryLastPhase from './components/form_recovery_last_phase'
+import formReg from './components/form_reg'
+import formRegLastPhase from './components/form_reg_last_phase'
 import helloWorld from './components/hello_world'
 import pageNotFound from './components/page_not_found'
 
@@ -13,14 +15,16 @@ import pageNotFound from './components/page_not_found'
 import layoutGlobal from './pages/layout_global'
 
 const routes = {
-  path: "/",
+  path: '/',
 	component: layoutGlobal,
 	indexRoute: { component: helloWorld },
 	childRoutes: [
-    { path: "login", component: formLogin },
-    { path: "recovery", component: formRecovery },
+    { path: 'login', component: formLogin },
+    { path: 'recovery', component: formRecovery },
     { path: 'recovery/:hash', component: formRecoveryLastPhase },
-    { path: "*", component: pageNotFound }
+    { path: 'reg', component: formReg },
+    { path: 'reg/:hash', component: formRegLastPhase },
+    { path: '*', component: pageNotFound }
   ]
 }
 

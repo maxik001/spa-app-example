@@ -97,7 +97,7 @@ export default class formRecoveryLastPhase extends React.Component {
           <form className="form-horizontal">
             <fieldset>
               <legend>Изменение реквизитов доступа к сайту</legend>
-              <Alert type="success" text="Пароль успешно изменен. Новый пароль отправлен на ваш email. Спасибо." />
+              <Alert type="success" text="Пароль успешно изменен. Новый пароль отправлен на ваш e-mail. Спасибо." />
             </fieldset>
           </form>
         )

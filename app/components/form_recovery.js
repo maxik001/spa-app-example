@@ -35,9 +35,9 @@ export default class formRecovery extends React.Component {
   }
   
   componentWillUnmount() {
-    storeFormRecovery.removeListener("submit_fail", this.handleSubmitFail);
-    storeFormRecovery.removeListener("submit_in_process", this.handleSubmitProcess);
-    storeFormRecovery.removeListener("submit_success", this.handleSubmitSuccess);
+    storeFormRecovery.removeListener("submit_fail", this.handleSubmitFail)
+    storeFormRecovery.removeListener("submit_in_process", this.handleSubmitProcess)
+    storeFormRecovery.removeListener("submit_success", this.handleSubmitSuccess)
   }
   
   handleEmailChange(event) {
@@ -48,7 +48,7 @@ export default class formRecovery extends React.Component {
     event.preventDefault()
 
     if(this.state.email.value === "") {
-      this.setState({email: {value: this.state.email.value, isValid: false, errorMsg: "Заполните пожалуйста email"}});
+      this.setState({email: {value: this.state.email.value, isValid: false, errorMsg: "Заполните пожалуйста E-mail"}})
     }    
     
     if(this.state.email.value !== "" && this.validateEmail(this.state.email.value)) {
@@ -58,21 +58,21 @@ export default class formRecovery extends React.Component {
         email: this.state.email.value
       })
     } else {
-      this.setState({email: {value: this.state.email.value, isValid: false, errorMsg: "Значение не похоже на email"}});
+      this.setState({email: {value: this.state.email.value, isValid: false, errorMsg: "Значение не похоже на E-mail"}})
     }
   }
   
   
   handleSubmitFail() {
-    this.setState({submitState: "finished", submitStatus: "error"});
+    this.setState({submitState: "finished", submitStatus: "error"})
   }
   
   handleSubmitProcess() {
-    this.setState({submitState: "process"});
+    this.setState({submitState: "process"})
   }
   
   handleSubmitSuccess() {
-    this.setState({submitState: "finished", submitStatus: "success"});
+    this.setState({submitState: "finished", submitStatus: "success"})
   }
 
   validateEmail(email) {
@@ -123,7 +123,7 @@ export default class formRecovery extends React.Component {
             <form className="form-horizontal">
               <fieldset>
                 <legend>Восстановление пароля</legend>
-                <Alert type="warning" text="API сервер недоступен. Попробуйте чуть позже..." />
+                <Alert type="warning" text="API сервер недоступен. Попробуйте, пожалуйста, чуть позже..." />
               </fieldset>
             </form>                  
           )
@@ -132,7 +132,7 @@ export default class formRecovery extends React.Component {
             <form className="form-horizontal">
               <fieldset>
                 <legend>Восстановление пароля</legend>
-                <Alert type="success" text="На указанный вами e-mail адрес отправлено письмо для восстановления пароля." /> 
+                <Alert type="success" text="На указанный вами e-mail отправлено письмо для восстановления пароля." /> 
               </fieldset>
             </form>                  
           )
